@@ -7,7 +7,7 @@ import { profile, education, experience, skillGroups } from "@/lib/data";
 import Card3D from "./Card3D";
 import Link from "next/link";
 
-export default function ResumeView() {
+export default function ResumeView({ email }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handlePrint() {
@@ -129,7 +129,7 @@ export default function ResumeView() {
                       <Phone className="h-3.5 w-3.5" /> {profile.phone}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Mail className="h-3.5 w-3.5" /> {profile.email}
+                      <Mail className="h-3.5 w-3.5" /> {email}
                     </span>
                     <span className="flex items-center gap-1">
                       <MapPin className="h-3.5 w-3.5" /> {profile.location}

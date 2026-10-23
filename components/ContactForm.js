@@ -7,7 +7,7 @@ import { profile } from "@/lib/data";
 
 const initialState = { name: "", email: "", company: "", message: "", website: "" };
 
-export default function ContactForm() {
+export default function ContactForm({ email }) {
   const [form, setForm] = useState(initialState);
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState("");
@@ -23,7 +23,7 @@ export default function ContactForm() {
     setStatus("loading");
     setErrorMsg("");
 
-    const directMailto = `mailto:rajeshrathaur0011@gmail.com?subject=${encodeURIComponent(
+    const directMailto = `mailto:${email}?subject=${encodeURIComponent(
       `Portfolio Enquiry from ${form.name}`
     )}&body=${encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company || "N/A"}\n\nMessage:\n${form.message}`
@@ -56,15 +56,15 @@ export default function ContactForm() {
           <h2 className="section-heading mb-6">Have a project in mind? Let&apos;s talk.</h2>
           <p className="mb-8 max-w-md text-sm leading-relaxed text-ink/70 dark:text-paper/70">
             Whether it&apos;s a high-scale booking engine, a performance audit, or a full frontend architecture build —
-            drop a note and enquiries are dispatched directly to my inbox at <strong className="text-gold-dark dark:text-gold">{profile.email}</strong>.
+            drop a note and enquiries are dispatched directly to my inbox at <strong className="text-gold-dark dark:text-gold">{email}</strong>.
           </p>
 
           <div className="space-y-4">
             <a
-              href={`mailto:${profile.email}`}
+              href={`mailto:${email}`}
               className="flex items-center gap-3 text-sm text-ink/80 transition-colors hover:text-gold-dark dark:text-paper/80 dark:hover:text-gold"
             >
-              <Mail className="h-4 w-4 text-gold" /> {profile.email}
+              <Mail className="h-4 w-4 text-gold" /> {email}
             </a>
             <a
               href={`tel:${profile.phone.replace(/[^\d+]/g, "")}`}
@@ -147,7 +147,7 @@ export default function ContactForm() {
             <div className="rounded-2xl border border-teal/20 bg-teal/10 p-4 space-y-2">
               <p className="flex items-center gap-2 text-sm font-medium text-teal-dark dark:text-teal-light">
                 <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
-                Thank you! Your enquiry has been routed to rajeshrathaur0011@gmail.com.
+                Thank you! Your enquiry has been routed to {email}.
               </p>
               {mailtoUrl && (
                 <div className="pt-1">
