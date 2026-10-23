@@ -3,10 +3,9 @@ import fs from "fs";
 import path from "path";
 
 const COUNTER_API_TOKEN =
-  process.env.COUNTER_API_TOKEN || "ut_AtA25Bh6P79JJgT7yVNpOaOoYYydn6vP3Ik2GGrN";
+  process.env.COUNTER_API_TOKEN;
 const COUNTER_API_BASE =
-  process.env.COUNTER_API_BASE ||
-  "https://api.counterapi.dev/v2/rajesh-rathores-team-6022/first-counter-6022";
+  process.env.COUNTER_API_BASE;
 
 const localBackupPath = path.join(process.cwd(), "lib", "visitor_count.json");
 
