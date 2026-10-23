@@ -30,14 +30,7 @@ cp .env.example .env.local
 
 Then fill in `.env.local`:
 
-```
-SMTP_HOST=
-SMTP_PORT=
-SMTP_USER=youraddress@gmail.com
-SMTP_PASS=your-16-char-app-password
-CONTACT_TO_EMAIL=yourname@gmail.com
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-```
+
 
 **Using Gmail (recommended, free):**
 1. Turn on 2-Step Verification on the Google account you want to send from.
@@ -46,9 +39,6 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
 
 Any SMTP provider works the same way (Outlook, Zoho, SendGrid SMTP, Resend SMTP, your host's mailbox, etc.) —
 just change `SMTP_HOST`/`SMTP_PORT`.
-
-`CONTACT_TO_EMAIL` is the inbox that receives every enquiry — set it to your own email address.
-If it's not set, it defaults to `rajeshrathaur0011@gmail.com` (from your CV).
 
 Until SMTP is configured, the forms will show a clear error instead of failing silently.
 
