@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+
+[build.environment]
+  # The contact email is intentionally public (shown on the site), so the
+  # scanner's match on these keys is a false positive.
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_TO_EMAIL,SMTP_USER"
