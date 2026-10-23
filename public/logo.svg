@@ -1,0 +1,26 @@
+<svg viewBox="0 0 250 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5FD4C4" />
+      <stop offset="100%" stop-color="#22B8A6" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C989" />
+      <stop offset="100%" stop-color="#D4A857" />
+    </linearGradient>
+    <linearGradient id="bracketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22B8A6" />
+      <stop offset="100%" stop-color="#D4A857" />
+    </linearGradient>
+  </defs>
+  <rect x="1" y="2" width="248" height="36" rx="18" fill="#111827" fill-opacity="0.8" stroke="#D4A857" stroke-opacity="0.2" stroke-width="1" />
+  <text x="14" y="26" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" letter-spacing="-0.5px">
+    <tspan fill="url(#tealGrad)" font-weight="800">&lt;&gt;</tspan>
+    <tspan fill="#FAF7F0" font-weight="700">code</tspan>
+    <tspan fill="url(#goldGrad)" font-weight="800">.</tspan>
+    <tspan fill="#22B8A6" font-weight="600">with</tspan>
+    <tspan fill="url(#goldGrad)" font-weight="800">.</tspan>
+    <tspan fill="url(#goldGrad)" font-weight="800">raj</tspan>
+    <tspan fill="url(#bracketGrad)" font-weight="800">&lt;/&gt;</tspan>
+  </text>
+</svg>
