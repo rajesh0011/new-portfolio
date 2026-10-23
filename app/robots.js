@@ -1,4 +1,4 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rajeshkumar.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export default function robots() {
   return {
