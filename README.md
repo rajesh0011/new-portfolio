@@ -31,11 +31,11 @@ cp .env.example .env.local
 Then fill in `.env.local`:
 
 ```
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
+SMTP_HOST=
+SMTP_PORT=
 SMTP_USER=youraddress@gmail.com
 SMTP_PASS=your-16-char-app-password
-CONTACT_TO_EMAIL=rajeshrathaur0011@gmail.com
+CONTACT_TO_EMAIL=yourname@gmail.com
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
