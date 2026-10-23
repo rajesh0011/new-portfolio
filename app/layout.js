@@ -4,6 +4,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
 import { profile } from "@/lib/data";
+import { getContactEmail } from "@/lib/contact";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -85,13 +86,17 @@ export const viewport = {
   ],
 };
 
+// Render at request time so the contact email (read from the environment)
+// is never written into prerendered build output.
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({ children }) {
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: profile.name,
     jobTitle: profile.role,
-    email: profile.email,
+    email: getContactEmail() || undefined,
     telephone: profile.phone,
     url: siteUrl,
     sameAs: [profile.github, profile.linkedin, profile.portfolio],

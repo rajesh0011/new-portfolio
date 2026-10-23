@@ -9,8 +9,10 @@ import About from "@/components/About";
 import ResumeView from "@/components/ResumeView";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { getContactEmail } from "@/lib/contact";
 
 export default function HomePage() {
+  const email = getContactEmail();
   return (
     <>
       <Navbar />
@@ -22,10 +24,10 @@ export default function HomePage() {
         <Experience />
         <Skills />
         <About />
-        <ResumeView />
-        <ContactForm />
+        <ResumeView email={email} />
+        <ContactForm email={email} />
       </main>
-      <Footer />
+      <Footer email={email} />
     </>
   );
 }

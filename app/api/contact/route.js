@@ -45,7 +45,7 @@ export async function POST(request) {
       );
     }
 
-    const to = getRecipient() || "rajeshrathaur0011@gmail.com";
+    const to = getRecipient();
     const mailtoUrl = `mailto:${to}?subject=${encodeURIComponent(
       `Portfolio Enquiry from ${name}`
     )}&body=${encodeURIComponent(

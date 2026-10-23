@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FreelanceForm from "@/components/FreelanceForm";
+import { getContactEmail } from "@/lib/contact";
 import { freelanceServices, process, achievements } from "@/lib/data";
 
 export const metadata = {
@@ -91,7 +92,7 @@ export default function FreelancePage() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer email={getContactEmail()} />
     </>
   );
 }

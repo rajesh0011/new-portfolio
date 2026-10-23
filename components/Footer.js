@@ -4,7 +4,7 @@ import { profile } from "@/lib/data";
 import VisitorCounter from "./VisitorCounter";
 import Logo from "./Logo";
 
-export default function Footer() {
+export default function Footer({ email }) {
   return (
     <footer className="border-t border-ink-line/10 py-12 dark:border-paper/10 bg-white/30 dark:bg-ink-soft/30 backdrop-blur-sm">
       <div className="container-page flex flex-col items-center justify-between gap-8 md:flex-row">
@@ -66,7 +66,7 @@ export default function Footer() {
               <Linkedin className="h-4 w-4" />
             </a>
             <a
-              href={`mailto:${profile.email}`}
+              href={`mailto:${email}`}
               aria-label="Email"
               className="text-ink/50 transition-colors hover:text-gold-dark dark:text-paper/50 dark:hover:text-gold"
             >
