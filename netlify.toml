@@ -1,0 +1,4 @@
+[build.environment]
+  # CONTACT_TO_EMAIL is the public contact address shown across the portfolio
+  # (footer, contact section, mailto links), so it is not a secret.
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_TO_EMAIL"
