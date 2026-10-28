@@ -194,7 +194,7 @@ export default function Projects({ projects: cmsProjects }) {
                           href={p.url}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="group inline-flex items-center gap-1 transition-colors hover:text-gold-dark dark:hover:text-gold"
+                          className="font-display group inline-flex items-center gap-1 transition-colors hover:text-gold-dark dark:hover:text-gold"
                         >
                           {p.name}
                         </a>

@@ -18,7 +18,7 @@ const pad = (n) => String(n).padStart(2, "0");
 
 function IntroPanel({ total }) {
   return (
-    <div className="flex h-[min(68svh,560px)] w-[86vw] shrink-0 flex-col justify-center pr-4 sm:w-[60vw] md:w-[440px] lg:w-[500px]">
+    <div className="flex h-[min(70svh,620px)] w-[86vw] shrink-0 flex-col justify-center pr-4 sm:w-[60vw] md:w-[460px] lg:w-[520px]">
       <span className="eyebrow">Selected Work</span>
       <h2 className="section-heading mt-3 !text-4xl sm:!text-5xl lg:!text-6xl">
         A gallery of <span className="italic text-gradient-gold">live systems.</span>
@@ -41,66 +41,47 @@ function ProjectSlide({ project, index, progress, parallax }) {
   const imgX = useTransform(progress, [0, 1], ["7%", "-7%"]);
 
   return (
-    <article className="group relative flex h-[min(68svh,660px)] w-[88vw] shrink-0 flex-col overflow-hidden rounded-3xl border border-ink-line/10 bg-white/70 shadow-xl shadow-ink/10 backdrop-blur-md transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gold/20 dark:border-paper/10 dark:bg-ink-soft/70 sm:w-[54vw] md:w-[420px] lg:w-[470px]">
+    <article className="group relative flex h-[min(70svh,620px)] w-[88vw] shrink-0 flex-col overflow-hidden rounded-3xl border border-ink-line/10 bg-white/70 shadow-xl shadow-ink/10 backdrop-blur-md transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gold/20 dark:border-paper/10 dark:bg-ink-soft/70 sm:w-[75vw] md:w-[520px] lg:w-[640px] xl:w-[720px]">
       <a
         href={project.url || undefined}
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`Visit ${project.name}`}
-        className="relative block h-[56%] overflow-hidden bg-ink/5"
+        className="relative block flex-1 overflow-hidden bg-ink/5"
         tabIndex={project.url ? 0 : -1}
       >
         <ProjectImage
           project={project}
           eager={index < 2}
-          className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-          style={parallax ? { x: imgX, scale: 1.16 } : undefined}
+          className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+          style={parallax ? { x: imgX, scale: 1.04 } : undefined}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-ink/10" />
-
-        <span className="absolute left-4 top-4 rounded-full bg-paper/90 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-ink backdrop-blur">
-          {project.tag || "Project"}
-        </span>
-        {project.featured && (
-          <span className="absolute right-4 top-4 rounded-full bg-gold px-2.5 py-1 font-mono text-[9px] font-bold text-ink">
-            ★ FLAGSHIP
-          </span>
-        )}
-        <span className="absolute bottom-3 left-4 font-display text-5xl font-semibold leading-none text-paper/90 drop-shadow">
-          {pad(index + 1)}
-        </span>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </a>
 
-      <div className="flex flex-1 flex-col justify-between gap-3 p-5 hidden">
-        <div>
-          <h3 className="font-display text-2xl font-semibold leading-tight sm:text-[28px]">{project.name}</h3>
-          <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-ink/70 dark:text-paper/70 sm:text-[13px]">
-            {project.summary}
-          </p>
-        </div>
-        <div className="flex items-end justify-between gap-3">
-          <div className="flex flex-wrap gap-1.5">
-            {(project.tech || []).slice(0, 3).map((t) => (
-              <span
-                key={t}
-                className="rounded-md border border-ink-line/10 bg-ink-soft/[0.03] px-2 py-0.5 font-mono text-[10px] text-ink/70 dark:border-paper/10 dark:bg-paper/[0.04] dark:text-paper/70"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-          {project.url && (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`Open ${project.name} in a new tab`}
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-paper transition-transform hover:scale-110 dark:bg-gold dark:text-ink"
-            >
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          )}
-        </div>
+      {/* Project Name Only */}
+      <div className="flex items-center justify-between border-t border-ink-line/10 bg-white/40 px-6 py-2.5 backdrop-blur-sm dark:border-paper/10 dark:bg-ink-soft/40 sm:px-7 sm:py-2">
+        <h3 className="mt-1 font-display text-2xl font-semibold leading-tight">
+          <a
+            href={project.url || undefined}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="transition-colors hover:text-gold-dark dark:hover:text-gold mt-1 font-display text-2xl font-semibold leading-tight"
+          >
+            {project.name}
+          </a>
+        </h3>
+        {project.url && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={`Open ${project.name} in a new tab`}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-paper transition-transform duration-300 hover:scale-110 dark:bg-gold dark:text-ink sm:h-11 sm:w-11"
+          >
+            <ArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5" />
+          </a>
+        )}
       </div>
     </article>
   );
@@ -108,7 +89,7 @@ function ProjectSlide({ project, index, progress, parallax }) {
 
 function OutroPanel() {
   return (
-    <div className="flex h-[min(68svh,560px)] w-[78vw] shrink-0 flex-col items-start justify-center rounded-3xl border border-dashed border-gold/50 p-8 sm:w-[54vw] md:w-[380px]">
+    <div className="flex h-[min(70svh,620px)] w-[78vw] shrink-0 flex-col items-start justify-center rounded-3xl border border-dashed border-gold/50 p-8 sm:w-[54vw] md:w-[380px]">
       <span className="eyebrow">That&apos;s the highlight reel</span>
       <h3 className="mt-3 font-display text-4xl font-semibold leading-tight">
         There&apos;s more <span className="italic text-gradient-gold">in the archive.</span>
