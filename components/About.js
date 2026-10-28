@@ -8,7 +8,7 @@ import Card3D from "./Card3D";
 
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="about" className="scroll-mt-20 py-20 sm:py-18">
       <div className="container-page grid gap-12 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16">
         <div>
           {/* Avatar Profile Card with Visual Polish */}
@@ -34,7 +34,7 @@ export default function About() {
           </div>
 
           <p className="eyebrow mb-3">Engineering Profile</p>
-          <h2 className="section-heading">
+          <h2 className="section-heading text-3xl md:text-4xl leading-relaxed">
             7+ years architecting web ecosystems where every millisecond counts.
           </h2>
           <p className="mt-5 text-sm text-ink/65 dark:text-paper/65">
@@ -58,7 +58,7 @@ export default function About() {
         </div>
 
         <div className="space-y-6">
-          <p className="text-base leading-relaxed text-ink/80 dark:text-paper/80 sm:text-lg">
+          <p className="text-base leading-relaxed text-ink/80 dark:text-paper/80 sm:text-normal">
             {profile.summary}
           </p>
 

@@ -324,7 +324,7 @@ export default function Globe3D({ className = "" }) {
 
       {/* Bottom Locations Legend */}
       <div className="mt-2 flex w-full flex-wrap items-center justify-center gap-2 border-t border-ink-line/10 pt-3 text-[11px] font-mono text-ink/60 dark:text-paper/60">
-        <span className="flex items-center gap-1 font-semibold text-gold-dark dark:text-gold">
+        <span className="flex items-center gap-1 font-normal text-gold-dark dark:text-gold">
           <span className="h-2 w-2 rounded-full bg-gold" /> Gurugram/Delhi
         </span>
         <span className="text-ink/30 dark:text-paper/30">·</span>

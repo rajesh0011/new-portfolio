@@ -3,10 +3,12 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Search, Sparkles, Filter, ChevronDown, ChevronUp, Layers, ExternalLink } from "lucide-react";
-import { projects, projectCategories } from "@/lib/data";
+import { projects as staticProjects, projectCategories } from "@/lib/data";
 import Card3D from "./Card3D";
 
-export default function Projects() {
+export default function Projects({ projects: cmsProjects }) {
+  // Data comes from MongoDB (via the home page); the static list is only a safety net.
+  const projects = cmsProjects?.length ? cmsProjects : staticProjects;
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedCard, setExpandedCard] = useState(null);
@@ -28,21 +30,21 @@ export default function Projects() {
 
       const q = searchQuery.toLowerCase().trim();
       const inName = project.name.toLowerCase().includes(q);
-      const inSummary = project.summary.toLowerCase().includes(q);
-      const inTag = project.tag.toLowerCase().includes(q);
+      const inSummary = (project.summary || "").toLowerCase().includes(q);
+      const inTag = (project.tag || "").toLowerCase().includes(q);
       const inTech = project.tech?.some((t) => t.toLowerCase().includes(q));
       const inPoints = project.points?.some((p) => p.toLowerCase().includes(q));
 
       return inName || inSummary || inTag || inTech || inPoints;
     });
-  }, [activeCategory, searchQuery]);
+  }, [projects, activeCategory, searchQuery]);
 
   function toggleExpand(projectName) {
     setExpandedCard((prev) => (prev === projectName ? null : projectName));
   }
 
   return (
-    <section id="projects" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="projects" className="scroll-mt-20 py-20 sm:py-18">
       <div className="container-page">
         {/* Header */}
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -53,7 +55,7 @@ export default function Projects() {
                 <Sparkles className="h-3 w-3" /> 26 Production Deployments
               </span>
             </div>
-            <h2 className="section-heading mt-3 max-w-2xl">
+            <h2 className="section-heading mt-3 max-w-2xl  text-3xl md:text-4xl leading-relaxed">
               From flagship luxury chains to high-concurrency extranets.
             </h2>
           </div>
@@ -136,7 +138,7 @@ export default function Projects() {
               const isExpanded = expandedCard === p.name;
               return (
                 <motion.div
-                  key={p.name}
+                  key={p.id || p.name}
                   layout
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -153,13 +155,13 @@ export default function Projects() {
                             {p.tag}
                           </span>
                           {p.featured && (
-                            <span className="rounded-full bg-gold/15 px-2 py-0.5 font-mono text-[9px] font-semibold text-gold-dark dark:text-gold">
+                            <span className="rounded-full bg-gold/15 px-2 py-0.5 font-mono text-[9px] font-normal text-gold-dark dark:text-gold">
                               ★ FLAGSHIP
                             </span>
                           )}
                         </div>
                         <a
-                          href={p.url}
+                          href={p.url || undefined}
                           target="_blank"
                           rel="noreferrer noopener"
                           aria-label={`Visit ${p.name}`}
@@ -238,7 +240,7 @@ export default function Projects() {
                         <div className="flex flex-wrap gap-3">
                           {p.metrics?.map((m) => (
                             <div key={m.label}>
-                              <p className="font-mono text-sm font-semibold text-gold-dark dark:text-gold">
+                              <p className="font-mono text-sm font-normal text-gold-dark dark:text-gold">
                                 {m.value}
                               </p>
                               <p className="text-[10px] text-ink/50 dark:text-paper/50">{m.label}</p>

@@ -9,12 +9,12 @@ const icons = [Code2, Database, Layout, Gauge, GitBranch, Cpu];
 
 export default function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="skills" className="scroll-mt-20 py-20 sm:py-18">
       <div className="container-page">
         <div className="mb-14 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow mb-4">Technical Stack &amp; Competencies</p>
-            <h2 className="section-heading max-w-2xl">
+            <h2 className="section-heading max-w-2xl text-3xl md:text-4xl leading-relaxed">
               Enterprise engineering tooling tuned for velocity and scale.
             </h2>
           </div>

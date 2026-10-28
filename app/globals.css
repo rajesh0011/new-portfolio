@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --font-serif: var(--font-cormorant), "Cormorant Garamond", "Cormorant Garamond Fallback", ui-serif, Georgia, serif;
+  /* Headings: Cormorant Garamond ONLY */
+    --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* Lenis owns smooth scrolling - native smooth-scroll would fight it (and the pinned gallery) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 :root { --stack-step: 12px; }
 @media (min-width: 768px) { :root { --stack-step: 22px; } }
@@ -37,12 +41,19 @@ html {
 .card-surface, .card-lift { transition: transform .3s ease, box-shadow .3s ease; }
 .card-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(212,168,87,.35); }
 
-/* User Requested: Headings font-family */
+/* Headings: Cormorant Garamond only (no Georgia / generic-serif fallback) */
 h1, h2, h3, h4, h5, h6, .font-display, .section-heading {
-  font-family: var(--font-serif), ui-serif, Georgia, serif !important;
+  font-family: var(--font-serif) !important;
 }
-/* Nested inline text inside headings must keep the serif heading font */
+/* Nested inline text inside headings keeps the heading font */
 h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+  font-family: var(--font-serif) !important;
+}
+h1 span{
+    font-family: var(--font-serif) !important;
+}
+.font-serif,
+.font-serif-brand {
   font-family: var(--font-serif), ui-serif, Georgia, serif !important;
 }
 
@@ -135,6 +146,7 @@ select:focus-visible {
   footer,
   .grain-overlay,
   #architecture,
+  #showcase,
   #projects,
   #skills,
   #contact {

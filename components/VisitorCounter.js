@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function VisitorCounter({ variant = "footer", className = "" }) {
   const [count, setCount] = useState(null);
-  const [activeNow, setActiveNow] = useState(2);
+  const [activeNow, setActiveNow] = useState(3);
 
   useEffect(() => {
     // Use session storage so refresh reads the updated count from CounterAPI
@@ -41,7 +41,7 @@ export default function VisitorCounter({ variant = "footer", className = "" }) {
           <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
         </span>
         <span className="font-semibold">{displayCount}</span>
-        <span className="text-[10px] uppercase opacity-75">Live Visits</span>
+        <span className="text-[10px] uppercase opacity-75"> Visits</span>
       </div>
     );
   }

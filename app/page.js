@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ProjectsGallery from "@/components/ProjectsGallery";
 import Achievements from "@/components/Achievements";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import Projects from "@/components/Projects";
@@ -9,16 +10,23 @@ import About from "@/components/About";
 import ResumeView from "@/components/ResumeView";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { getPublicProjects } from "@/lib/projects-service";
 
-export default function HomePage() {
+// Re-generate the page at most once a minute; CMS edits also trigger revalidatePath("/").
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const projects = await getPublicProjects();
+
   return (
     <>
       <Navbar />
       <main>
         <Hero />
+        <ProjectsGallery projects={projects} />
         <Achievements />
         <ArchitectureSection />
-        <Projects />
+        <Projects projects={projects} />
         <Experience />
         <Skills />
         <About />

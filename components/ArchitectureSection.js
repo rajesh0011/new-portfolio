@@ -69,17 +69,17 @@ export default function ArchitectureSection() {
   const activePillar = pillars[activeTab];
 
   return (
-    <section id="architecture" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="architecture" className="scroll-mt-20 py-20 sm:py-18">
       <div className="container-page">
         <div className="mb-14 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <div className="flex items-center gap-2">
               <span className="eyebrow">Enterprise Engineering Philosophy</span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-gold/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-gold-dark dark:text-gold">
+              <span className="inline-flex items-center gap-1 rounded-full bg-gold/10 px-2.5 py-0.5 font-mono text-[10px] font-normal text-gold-dark dark:text-gold">
                 <Cpu className="h-3 w-3" /> Production Scale
               </span>
             </div>
-            <h2 className="section-heading mt-3 max-w-2xl">
+            <h2 className="section-heading mt-3 max-w-2xl text-3xl md:text-4xl leading-relaxed">
               Engineered for massive concurrency, rock-solid stability, and zero drift.
             </h2>
           </div>
@@ -154,7 +154,7 @@ export default function ArchitectureSection() {
 
               <div className="flex flex-col items-center justify-center rounded-2xl border border-ink-line/10 bg-ink-soft/[0.04] p-8 text-center dark:border-paper/10 dark:bg-paper/[0.03]">
                 <p className="eyebrow mb-2">Proven Benchmark</p>
-                <span className="font-display text-4xl font-semibold text-gold-dark dark:text-gold sm:text-5xl">
+                <span className="font-display text-4xl font-normal text-gold-dark dark:text-gold sm:text-5xl">
                   {activePillar.metric}
                 </span>
                 <p className="mt-3 max-w-[200px] text-xs text-ink/60 dark:text-paper/60">

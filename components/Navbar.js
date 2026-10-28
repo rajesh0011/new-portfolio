@@ -114,7 +114,7 @@ export default function Navbar() {
                 <a
                   href="/#resume-cv"
                   onClick={() => setOpen(false)}
-                  className="flex-1 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-center text-xs font-semibold text-gold-dark dark:text-gold"
+                  className="flex-1 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-center text-xs font-normal text-gold-dark dark:text-gold"
                 >
                   View CV
                 </a>

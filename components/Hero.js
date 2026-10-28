@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin, FileText, Sparkles, CheckCircle2, ShieldCheck, Globe as GlobeIcon, Zap } from "lucide-react";
 import { profile } from "@/lib/data";
@@ -8,6 +7,7 @@ import DepartureBoard from "./DepartureBoard";
 import Globe3D from "./Globe3D";
 import Card3D from "./Card3D";
 import VisitorCounter from "./VisitorCounter";
+import HangingIDCard from "./HangingIDCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -20,7 +20,7 @@ const fadeUp = {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-10 sm:pt-16 lg:pt-20">
+    <section className="relative overflow-hidden pt-0 sm:pt-16 lg:pt-20">
       {/* Ambient background glows */}
       <div
         aria-hidden="true"
@@ -31,9 +31,10 @@ export default function Hero() {
         className="pointer-events-none absolute top-40 -left-24 h-[440px] w-[440px] rounded-full bg-teal/15 blur-[130px]"
       />
 
-      <div className="container-page relative z-10 grid gap-12 pb-16 sm:pb-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div className="container-page relative z-10 pb-16 sm:pb-24">
+      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-12">
         {/* Left Column: Avatar + Hero Headline & CTAs */}
-        <div>
+        <div className="order-2 lg:order-1">
           {/* Top Row: Avatar & Visitor Counter */}
           <motion.div
             variants={fadeUp}
@@ -42,32 +43,6 @@ export default function Hero() {
             custom={0}
             className="mb-6 flex flex-wrap items-center gap-3.5"
           >
-            {/* Avatar Pill with Glowing Ring */}
-            <div className="group relative flex items-center gap-2.5 rounded-full border border-gold/40 bg-white/70 py-1 pl-1 pr-3.5 shadow-md backdrop-blur-md transition-all duration-300 hover:border-gold hover:shadow-gold/20 dark:border-paper/20 dark:bg-ink-soft/70">
-              <div className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-gold/60 shadow-sm">
-                <Image
-                  src="/avatar.jpg"
-                  alt="Rajesh Kumar"
-                  fill
-                  sizes="36px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="font-display text-xs font-semibold text-ink dark:text-paper leading-none">
-                  Rajesh Kumar
-                </span>
-                <span className="text-[10px] font-mono text-gold-dark dark:text-gold">
-                  Sr. Frontend Architect
-                </span>
-              </div>
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
-              </span>
-            </div>
-
             {/* Live Visitor Counter Pill */}
             <VisitorCounter variant="badge" />
           </motion.div>
@@ -78,7 +53,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="font-display text-4xl font-medium leading-[1.05] text-balance sm:text-5xl md:text-6xl"
+            className="font-display text-3xl font-medium leading-[1.05] text-balance sm:text-4xl md:text-5xl"
           >
             Architecting web ecosystems and booking engines that{" "}
             <span className="italic text-gradient-gold">scale without compromise.</span>
@@ -94,7 +69,7 @@ export default function Hero() {
           >
             Senior Front-End Developer with <strong className="text-ink dark:text-paper">7+ years</strong> building
             mission-critical platforms across hospitality, enterprise SaaS, and high-concurrency booking engines using{" "}
-            <span className="font-semibold text-gold-dark dark:text-gold">React.js, Next.js, and TypeScript</span> — delivering sub-second Core Web Vitals and zero-drift UI consistency.
+            <span className="font-normal text-gold-dark dark:text-gold">React.js, Next.js, and TypeScript</span> — delivering sub-second Core Web Vitals and zero-drift UI consistency.
           </motion.p>
 
           {/* Key Value Proposition Chips */}
@@ -126,7 +101,7 @@ export default function Hero() {
           >
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-ink/20 dark:bg-gold dark:text-ink dark:hover:shadow-gold/25"
+              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-normal text-paper transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-ink/20 dark:bg-gold dark:text-ink dark:hover:shadow-gold/25"
             >
               Get in Touch
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -134,7 +109,7 @@ export default function Hero() {
 
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-full border border-ink-line/20 px-6 py-3.5 text-sm font-semibold text-ink/80 transition-all hover:border-gold hover:text-gold-dark dark:border-paper/20 dark:text-paper/80 dark:hover:text-gold"
+              className="inline-flex items-center gap-2 rounded-full border border-ink-line/20 px-6 py-3.5 text-sm font-normal text-ink/80 transition-all hover:border-gold hover:text-gold-dark dark:border-paper/20 dark:text-paper/80 dark:hover:text-gold"
             >
               Explore 26+ Projects
             </a>
@@ -170,26 +145,35 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Column: 3D Interactive Globe (like on Shadcn) + Core Web Vitals HUD */}
+        {/* Right Column: Hanging ID card (hangs from the navbar edge on desktop) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative flex flex-col items-center justify-center gap-5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="order-1 lg:order-2 relative flex justify-center lg:-mt-20 lg:justify-center"
         >
-          {/* Shadcn-Style 3D WebGL Globe */}
-          <div className="w-full flex justify-center">
-            <Globe3D />
-          </div>
-
-          {/* Departure Board / Core Web Vitals Console with 3D Card Hover */}
-          <div className="w-full max-w-[500px]">
-            <Card3D>
-              <DepartureBoard />
-            </Card3D>
-          </div>
+          <HangingIDCard />
         </motion.div>
       </div>
+
+      {/* Second row: 3D Globe + Core Web Vitals console */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-14 grid gap-6 sm:mt-20 lg:grid-cols-2 lg:items-center"
+      >
+        <div className="flex w-full justify-center">
+          <Globe3D />
+        </div>
+        <div className="mx-auto w-full max-w-[500px]">
+          <Card3D>
+            <DepartureBoard />
+          </Card3D>
+        </div>
+      </motion.div>
+    </div>
     </section>
   );
 }

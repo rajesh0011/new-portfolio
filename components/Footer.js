@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, PhoneCall } from "lucide-react";
 import { profile } from "@/lib/data";
 import VisitorCounter from "./VisitorCounter";
 import Logo from "./Logo";
@@ -56,6 +56,7 @@ export default function Footer() {
             >
               <Github className="h-4 w-4" />
             </a>
+            
             <a
               href={profile.linkedin}
               target="_blank"
@@ -71,6 +72,15 @@ export default function Footer() {
               className="text-ink/50 transition-colors hover:text-gold-dark dark:text-paper/50 dark:hover:text-gold"
             >
               <Mail className="h-4 w-4" />
+            </a>
+             <a
+              href={profile.whatsapp}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Whatsapp"
+              className="text-ink/50 transition-colors hover:text-gold-dark dark:text-paper/50 dark:hover:text-gold"
+            >
+              <PhoneCall className="h-4 w-4" />
             </a>
           </div>
 

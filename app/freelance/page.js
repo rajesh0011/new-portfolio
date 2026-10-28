@@ -77,7 +77,7 @@ export default function FreelancePage() {
           </div>
         </section>
 
-        <section id="enquiry" className="scroll-mt-20 py-20 sm:py-28">
+        <section id="enquiry" className="scroll-mt-20 py-20 sm:py-18">
           <div className="container-page grid gap-12 lg:grid-cols-[0.4fr_0.6fr] lg:gap-16">
             <div>
               <p className="eyebrow mb-4">Project enquiry</p>

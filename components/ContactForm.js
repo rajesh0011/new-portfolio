@@ -49,7 +49,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="contact" className="scroll-mt-10 py-20 sm:py-8">
       <div className="container-page grid gap-12 lg:grid-cols-[0.45fr_0.55fr] lg:gap-16">
         <div>
           <p className="eyebrow mb-4">Get in touch</p>
@@ -140,14 +140,14 @@ export default function ContactForm() {
             ) : (
               <Send className="h-4 w-4" />
             )}
-            {status === "loading" ? "Sending to Rajesh..." : "Send enquiry to Rajesh"}
+            {status === "loading" ? "Submitting..." : "Submit enquiry"}
           </button>
 
           {status === "success" && (
             <div className="rounded-2xl border border-teal/20 bg-teal/10 p-4 space-y-2">
               <p className="flex items-center gap-2 text-sm font-medium text-teal-dark dark:text-teal-light">
                 <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
-                Thank you! Your enquiry has been routed to rajeshrathaur0011@gmail.com.
+                Thank you! Your enquiry has been submitted successfully.
               </p>
               {mailtoUrl && (
                 <div className="pt-1">

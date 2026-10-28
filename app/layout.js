@@ -1,28 +1,21 @@
-import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import SmoothScroll from "@/components/SmoothScroll";
 import { profile } from "@/lib/data";
 
-const cormorant = Cormorant_Garamond({
+
+const montserratSans = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
-  variable: "--font-cormorant",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-const inter = Inter({
+const cormorantSerif = Cormorant_Garamond({
+  variable: "--font-serif",
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -111,7 +104,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className={`${cormorant.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${cormorantSerif.variable} antialiased`}>
         <ThemeProvider>
           <ScrollProgress />
           <SmoothScroll>

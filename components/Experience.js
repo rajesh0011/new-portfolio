@@ -53,7 +53,7 @@ function StackCard({ job, i, total, progress, reduce }) {
         <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:justify-between">
           <div>
             <h3 className="font-display text-2xl font-bold text-ink dark:text-paper sm:text-3xl">{job.role}</h3>
-            <p className="mt-1 text-base font-semibold text-gold-dark dark:text-gold sm:text-lg">{job.company}</p>
+            <p className="mt-1 text-base font-normal text-gold-dark dark:text-gold sm:text-lg">{job.company}</p>
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-ink/65 dark:text-paper/65">
             <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 text-gold" />{job.start} — {job.end}</span>
@@ -82,12 +82,12 @@ export default function Experience() {
   const total = experience.length;
 
   return (
-    <section id="experience" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="experience" className="scroll-mt-20 py-20 sm:py-18">
       <div className="container-page">
         <div className="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow mb-3">Career Trajectory</p>
-            <h2 className="section-heading max-w-2xl">7+ years delivering mission-critical web applications.</h2>
+            <h2 className="section-heading max-w-2xl   text-3xl md:text-4xl leading-relaxed">7+ years delivering mission-critical web applications.</h2>
           </div>
           <p className="max-w-xs text-sm text-ink/65 dark:text-paper/65">
             A progressive track record across enterprise hospitality platforms, SaaS, and high-concurrency systems.

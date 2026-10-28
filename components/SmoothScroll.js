@@ -14,6 +14,7 @@ export default function SmoothScroll({ children }) {
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 2,
+      anchors: { offset: -64 },
     });
 
     function raf(time) {

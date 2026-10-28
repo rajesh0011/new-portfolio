@@ -15,14 +15,14 @@ export default function ResumeView() {
   }
 
   return (
-    <section id="resume-cv" className="scroll-mt-20 py-16 sm:py-24 border-t border-ink-line/10 dark:border-paper/10">
+    <section id="resume-cv" className="scroll-mt-10 py-10 sm:py-14 border-t border-ink-line/10 dark:border-paper/10">
       <div className="container-page">
         <Card3D className="p-8 sm:p-12">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
             <div>
               <div className="flex items-center gap-2">
                 <span className="eyebrow">Curriculum Vitae</span>
-                <span className="rounded-full bg-gold/15 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-gold-dark dark:text-gold">
+                <span className="rounded-full bg-gold/15 px-2.5 py-0.5 font-mono text-[10px] font-normal text-gold-dark dark:text-gold">
                   Enterprise Standard
                 </span>
               </div>
