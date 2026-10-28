@@ -10,7 +10,7 @@ import Logo from "./Logo";
 const links = [
   { href: "/#about", label: "About" },
   { href: "/#architecture", label: "Architecture" },
-  { href: "/#projects", label: "Projects (26+)" },
+  { href: "/#projects", label: "Projects (48+)" },
   { href: "/#experience", label: "Experience" },
   { href: "/#skills", label: "Skills" },
   { href: "/#resume-cv", label: "Resume" },

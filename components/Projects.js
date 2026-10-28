@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Search, Sparkles, Filter, ChevronDown, ChevronUp, Layers, ExternalLink } from "lucide-react";
 import { projects as staticProjects, projectCategories } from "@/lib/data";
 import Card3D from "./Card3D";
+import ProjectImage from "./ProjectImage";
 
 export default function Projects({ projects: cmsProjects }) {
   // Data comes from MongoDB (via the home page); the static list is only a safety net.
@@ -52,7 +53,7 @@ export default function Projects({ projects: cmsProjects }) {
             <div className="flex items-center gap-2">
               <span className="eyebrow">Enterprise Portfolio</span>
               <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-teal-dark dark:text-teal-light">
-                <Sparkles className="h-3 w-3" /> 26 Production Deployments
+                <Sparkles className="h-3 w-3" /> {projects.length}+ Production Deployments
               </span>
             </div>
             <h2 className="section-heading mt-3 max-w-2xl  text-3xl md:text-4xl leading-relaxed">
@@ -170,6 +171,22 @@ export default function Projects({ projects: cmsProjects }) {
                           <ArrowUpRight className="h-4 w-4" />
                         </a>
                       </div>
+
+                      {/* Project Image Preview */}
+                      <a
+                        href={p.url || undefined}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        tabIndex={-1}
+                        aria-hidden="true"
+                        className="group/img relative mb-4 block h-44 w-full overflow-hidden rounded-xl border border-ink-line/10 bg-ink/5 dark:border-paper/10"
+                      >
+                        <ProjectImage
+                          project={p}
+                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/img:opacity-100" />
+                      </a>
 
                       {/* Project Name & Summary */}
                       <h3 className="font-display text-xl font-medium sm:text-2xl">

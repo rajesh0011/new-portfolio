@@ -41,7 +41,7 @@ function ProjectSlide({ project, index, progress, parallax }) {
   const imgX = useTransform(progress, [0, 1], ["7%", "-7%"]);
 
   return (
-    <article className="group relative flex h-[min(68svh,560px)] w-[78vw] shrink-0 flex-col overflow-hidden rounded-3xl border border-ink-line/10 bg-white/70 shadow-xl shadow-ink/10 backdrop-blur-md transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gold/20 dark:border-paper/10 dark:bg-ink-soft/70 sm:w-[54vw] md:w-[420px] lg:w-[470px]">
+    <article className="group relative flex h-[min(68svh,660px)] w-[88vw] shrink-0 flex-col overflow-hidden rounded-3xl border border-ink-line/10 bg-white/70 shadow-xl shadow-ink/10 backdrop-blur-md transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-gold/20 dark:border-paper/10 dark:bg-ink-soft/70 sm:w-[54vw] md:w-[420px] lg:w-[470px]">
       <a
         href={project.url || undefined}
         target="_blank"
@@ -71,7 +71,7 @@ function ProjectSlide({ project, index, progress, parallax }) {
         </span>
       </a>
 
-      <div className="flex flex-1 flex-col justify-between gap-3 p-5">
+      <div className="flex flex-1 flex-col justify-between gap-3 p-5 hidden">
         <div>
           <h3 className="font-display text-2xl font-semibold leading-tight sm:text-[28px]">{project.name}</h3>
           <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-ink/70 dark:text-paper/70 sm:text-[13px]">

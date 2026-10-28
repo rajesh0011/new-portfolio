@@ -84,7 +84,7 @@ export default function ArchitectureSection() {
             </h2>
           </div>
           <p className="max-w-xs text-sm text-ink/60 dark:text-paper/60">
-            How I approach large-scale frontend architecture across 26+ shipped systems.
+            How I approach large-scale frontend architecture across 48+ shipped systems.
           </p>
         </div>
 

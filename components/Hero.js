@@ -87,7 +87,7 @@ export default function Hero() {
               <ShieldCheck className="h-3.5 w-3.5 text-gold" /> STAAH &amp; Payment APIs
             </span>
             <span className="flex items-center gap-1.5 rounded-full border border-ink-line/10 bg-white/40 px-3 py-1 dark:border-paper/10 dark:bg-ink-soft/40">
-              <Sparkles className="h-3.5 w-3.5 text-teal" /> 26+ Shipped Systems
+              <Sparkles className="h-3.5 w-3.5 text-teal" /> 48+ Shipped Systems
             </span>
           </motion.div>
 
@@ -111,7 +111,7 @@ export default function Hero() {
               href="#projects"
               className="inline-flex items-center gap-2 rounded-full border border-ink-line/20 px-6 py-3.5 text-sm font-normal text-ink/80 transition-all hover:border-gold hover:text-gold-dark dark:border-paper/20 dark:text-paper/80 dark:hover:text-gold"
             >
-              Explore 26+ Projects
+              Explore 48+ Projects
             </a>
 
             <a
