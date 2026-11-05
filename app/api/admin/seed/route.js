@@ -26,7 +26,7 @@ export async function POST(request) {
         return {
           updateOne: {
             filter: { slug: slugify(p.name) },
-            update: { $setOnInsert: { ...data, slug: slugify(p.name), published: true, order: i } },
+            update: { $set: { ...data, slug: slugify(p.name), published: true, order: i } },
             upsert: true,
           },
         };
@@ -38,10 +38,11 @@ export async function POST(request) {
     return NextResponse.json({
       ok: true,
       inserted: result.upsertedCount,
-      skipped: ops.length - result.upsertedCount,
+      updated: result.modifiedCount,
+      skipped: ops.length - result.upsertedCount - result.modifiedCount,
     });
   } catch (err) {
     console.error("[POST /api/admin/seed]", err);
-    return NextResponse.json({ ok: false, error: "Seeding failed" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: err.message || "Seeding failed" }, { status: 500 });
   }
 }
