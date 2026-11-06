@@ -4,8 +4,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Search, Sparkles, Filter, ChevronDown, ChevronUp, Layers, ExternalLink } from "lucide-react";
 import { projects as staticProjects, projectCategories } from "@/lib/data";
-import Card3D from "./Card3D";
-import ProjectImage from "./ProjectImage";
+import ProjectBarrel from "./ProjectBarrel";
 
 export default function Projects({ projects: cmsProjects }) {
   // Data comes from MongoDB (via the home page); the static list is only a safety net.
@@ -132,154 +131,8 @@ export default function Projects({ projects: cmsProjects }) {
           )}
         </div>
 
-        {/* Project Cards Grid with 3D Physics */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((p, i) => {
-              const isExpanded = expandedCard === p.name;
-              return (
-                <motion.div
-                  key={p.id || p.name}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: (i % 6) * 0.04 }}
-                  className="h-full"
-                >
-                  <Card3D className="flex h-full flex-col justify-between p-6 transition-all">
-                    <div>
-                      {/* Top Badges */}
-                      <div className="mb-4 flex items-start justify-between gap-2">
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <span className="rounded-full bg-teal/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-teal-dark dark:text-teal-light">
-                            {p.tag}
-                          </span>
-                          {p.featured && (
-                            <span className="rounded-full bg-gold/15 px-2 py-0.5 font-mono text-[9px] font-normal text-gold-dark dark:text-gold">
-                              ★ FLAGSHIP
-                            </span>
-                          )}
-                        </div>
-                        <a
-                          href={p.url || undefined}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          aria-label={`Visit ${p.name}`}
-                          className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-ink-line/10 bg-paper/60 text-ink/50 transition-colors hover:border-gold hover:text-gold-dark dark:border-paper/10 dark:bg-ink/60 dark:text-paper/50 dark:hover:text-gold"
-                        >
-                          <ArrowUpRight className="h-4 w-4" />
-                        </a>
-                      </div>
-
-                      {/* Project Image Preview */}
-                      <a
-                        href={p.url || undefined}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        tabIndex={-1}
-                        aria-hidden="true"
-                        className="group/img relative mb-4 block h-44 w-full overflow-hidden rounded-xl border border-ink-line/10 bg-ink/5 dark:border-paper/10"
-                      >
-                        <ProjectImage
-                          project={p}
-                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover/img:opacity-100" />
-                      </a>
-
-                      {/* Project Name & Summary */}
-                      <h3 className="font-display text-xl font-medium sm:text-2xl">
-                        <a
-                          href={p.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="font-display group inline-flex items-center gap-1 transition-colors hover:text-gold-dark dark:hover:text-gold"
-                        >
-                          {p.name}
-                        </a>
-                      </h3>
-                      <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-ink/75 dark:text-paper/75">
-                        {p.summary}
-                      </p>
-
-                      {/* Tech Stack Pills */}
-                      {p.tech && (
-                        <div className="mt-4 flex flex-wrap gap-1.5">
-                          {p.tech.map((t) => (
-                            <span
-                              key={t}
-                              className="rounded-md border border-ink-line/10 bg-ink-soft/[0.03] px-2 py-0.5 font-mono text-[10px] text-ink/70 dark:border-paper/10 dark:bg-paper/[0.04] dark:text-paper/70"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Expandable Engineering Details */}
-                      {p.points && p.points.length > 0 && (
-                        <div className="mt-4">
-                          <button
-                            type="button"
-                            onClick={() => toggleExpand(p.name)}
-                            className="flex items-center gap-1 font-mono text-[11px] font-medium text-gold-dark hover:underline dark:text-gold"
-                          >
-                            <span>{isExpanded ? "Hide Engineering Details" : "View Engineering Highlights"}</span>
-                            {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-                          </button>
-
-                          <AnimatePresence>
-                            {isExpanded && (
-                              <motion.ul
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.25 }}
-                                className="mt-3 space-y-2 overflow-hidden border-t border-ink-line/10 pt-3 dark:border-paper/10"
-                              >
-                                {p.points.map((pt, pIdx) => (
-                                  <li key={pIdx} className="flex items-start gap-2 text-xs leading-relaxed text-ink/70 dark:text-paper/70">
-                                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-teal" />
-                                    <span>{pt}</span>
-                                  </li>
-                                ))}
-                              </motion.ul>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Bottom Metrics Bar */}
-                    <div className="mt-6 border-t border-ink-line/10 pt-4 dark:border-paper/10">
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-wrap gap-3">
-                          {p.metrics?.map((m) => (
-                            <div key={m.label}>
-                              <p className="font-mono text-sm font-normal text-gold-dark dark:text-gold">
-                                {m.value}
-                              </p>
-                              <p className="text-[10px] text-ink/50 dark:text-paper/50">{m.label}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <a
-                          href={p.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="inline-flex items-center gap-1 font-mono text-[10px] text-ink/50 hover:text-gold dark:text-paper/50"
-                        >
-                          Visit <ExternalLink className="h-2.5 w-2.5" />
-                        </a>
-                      </div>
-                    </div>
-                  </Card3D>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
+        {/* 3D barrel carousel */}
+        {filteredProjects.length > 0 && <ProjectBarrel projects={filteredProjects} />}
 
         {filteredProjects.length === 0 && (
           <div className="rounded-2xl border border-dashed border-ink-line/20 p-12 text-center dark:border-paper/20">
