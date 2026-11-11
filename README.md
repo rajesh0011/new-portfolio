@@ -3,7 +3,6 @@
 A Next.js (App Router, `.js` files) portfolio and freelance-enquiry site, built with Tailwind CSS.
 Content is sourced from your CV and lives in one file: `lib/data.js`.
 
-
 ## Features
 
 - SEO: per-page metadata, Open Graph/Twitter cards, JSON-LD Person schema, `sitemap.xml`, `robots.txt`.
