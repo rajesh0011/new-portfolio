@@ -5,6 +5,8 @@ Content is sourced from your CV and lives in one file: `lib/data.js`.
 
 ## Features
 
+#for badge
+
 - SEO: per-page metadata, Open Graph/Twitter cards, JSON-LD Person schema, `sitemap.xml`, `robots.txt`.
 - Light/dark theme toggle (persisted, no flash-of-wrong-theme).
 - Responsive, animated UI (Tailwind + Framer Motion) — hero, achievements, experience timeline,
