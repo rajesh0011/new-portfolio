@@ -3,7 +3,7 @@
 A Next.js (App Router, `.js` files) portfolio and freelance-enquiry site, built with Tailwind CSS.
 Content is sourced from your CV and lives in one file: `lib/data.js`.
 
-Testing YOLO achievement
+Testing YOLO achievement!
 
 ## Features
 
