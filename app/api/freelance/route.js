@@ -1,61 +1,45 @@
 import { NextResponse } from "next/server";
-import { getTransporter, getRecipient } from "@/lib/mailer";
+import { getTransporter, getRecipient, describeMailError } from "@/lib/mailer";
+import { validateFreelance, escapeHtml } from "@/lib/validation";
 
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+export const runtime = "nodejs";
 
 export async function POST(request) {
+  let body;
   try {
-    const body = await request.json();
-    const {
-      name,
-      email,
-      phone,
-      company,
-      projectType,
-      budget,
-      timeline,
-      details,
-      website, // honeypot
-    } = body;
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: "Invalid request body." }, { status: 400 });
+  }
 
-    if (website) {
-      return NextResponse.json({ ok: true });
-    }
+  if (body?.website) {
+    return NextResponse.json({ ok: true });
+  }
 
-    if (!name || !email || !phone || !details) {
-      return NextResponse.json(
-        { ok: false, error: "Name, email, phone, and project details are required." },
-        { status: 400 }
-      );
-    }
-    if (!isValidEmail(email)) {
-      return NextResponse.json(
-        { ok: false, error: "Please provide a valid email address." },
-        { status: 400 }
-      );
-    }
+  const { ok, errors, values } = validateFreelance(body);
+  if (!ok) {
+    return NextResponse.json(
+      { ok: false, error: Object.values(errors)[0], errors },
+      { status: 400 }
+    );
+  }
 
-    const transporter = getTransporter();
-    const to = getRecipient();
+  const transporter = getTransporter();
+  const to = getRecipient();
+  if (!transporter || !to) {
+    console.error("Freelance form: SMTP is not configured.");
+    return NextResponse.json(
+      { ok: false, error: "Email delivery is temporarily unavailable. Please email me directly." },
+      { status: 503 }
+    );
+  }
 
-    if (!transporter) {
-      console.warn("Freelance enquiry received but SMTP is not configured:", { name, email, company });
-      return NextResponse.json(
-        {
-          ok: false,
-          error:
-            "Email delivery isn't configured yet on the server. The site owner needs to set SMTP_HOST, SMTP_USER, and SMTP_PASS.",
-        },
-        { status: 503 }
-      );
-    }
-
+  const { name, email, phone, company, projectType, budget, timeline, details } = values;
+  try {
     await transporter.sendMail({
-      from: `"Freelance Enquiry" <${process.env.SMTP_USER}>`,
+      from: `"Freelance Enquiry" <${process.env.SMTP_USER.trim()}>`,
       to,
-      replyTo: email,
+      replyTo: `"${name.replace(/"/g, "")}" <${email}>`,
       subject: `New freelance project enquiry from ${name}${company ? ` (${company})` : ""}`,
       text: [
         `Name: ${name}`,
@@ -69,7 +53,7 @@ export async function POST(request) {
         "Project details:",
         details,
       ]
-        .filter(Boolean)
+        .filter((l) => l !== null)
         .join("\n"),
       html: `
         <div style="font-family: sans-serif; font-size: 14px; color: #111;">
@@ -83,25 +67,15 @@ export async function POST(request) {
           ${timeline ? `<p><strong>Timeline:</strong> ${escapeHtml(timeline)}</p>` : ""}
           <p><strong>Project details:</strong></p>
           <p style="white-space: pre-wrap;">${escapeHtml(details)}</p>
-        </div>
-      `,
+        </div>`,
     });
-
-    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("Freelance form error:", err);
+    console.error("Freelance form SMTP error:", describeMailError(err), err?.message);
     return NextResponse.json(
-      { ok: false, error: "Something went wrong sending your enquiry. Please try again." },
-      { status: 500 }
+      { ok: false, error: "We couldn't deliver your enquiry right now. Please try again or email me directly." },
+      { status: 502 }
     );
   }
-}
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  return NextResponse.json({ ok: true });
 }

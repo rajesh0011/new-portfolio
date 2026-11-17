@@ -13,23 +13,23 @@ export default function Logo({ className = "h-8 w-auto", ...props }) {
         <defs>
           {/* Gradients matching web application design system */}
           <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#5FD4C4" />
-            <stop offset="100%" stopColor="#22B8A6" />
+            <stop offset="0%" stopColor="#67E8F9" />
+            <stop offset="100%" stopColor="#22D3EE" />
           </linearGradient>
 
           <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#E8C989" />
-            <stop offset="100%" stopColor="#D4A857" />
+            <stop offset="0%" stopColor="#C4B5FD" />
+            <stop offset="100%" stopColor="#A78BFA" />
           </linearGradient>
 
           <linearGradient id="bracketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#22B8A6" />
-            <stop offset="100%" stopColor="#D4A857" />
+            <stop offset="0%" stopColor="#22D3EE" />
+            <stop offset="100%" stopColor="#A78BFA" />
           </linearGradient>
 
           {/* Subtle glow filter */}
           <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="#22B8A6" floodOpacity="0.25" />
+            <feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="#22D3EE" floodOpacity="0.25" />
           </filter>
         </defs>
 
@@ -83,7 +83,7 @@ export default function Logo({ className = "h-8 w-auto", ...props }) {
           </tspan>
 
           {/* "with" in subtle teal/gold tint */}
-          <tspan fill="#22B8A6" fontWeight="600">
+          <tspan fill="#22D3EE" fontWeight="600">
             with
           </tspan>
 

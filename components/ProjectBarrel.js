@@ -58,7 +58,7 @@ export default function ProjectBarrel({ projects }) {
           if (info.offset.x < -50 || info.velocity.x < -400) go(1);
           else if (info.offset.x > 50 || info.velocity.x > 400) go(-1);
         }}
-        style={{ perspective: 1800, touchAction: "pan-y", height: cardH + 40 }}
+        style={{ perspective: cardW < 340 ? 1200 : 1800, touchAction: "pan-y", height: cardH + 40 }}
         className="relative cursor-grab overflow-hidden active:cursor-grabbing"
       >
         <motion.div
@@ -90,7 +90,8 @@ export default function ProjectBarrel({ projects }) {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  transform: `rotateY(${i * step}deg) translateZ(${radius}px)`,
+                  transform: `rotateY(${i * step}deg) translateZ(${radius + (isActive ? 60 : 0)}px) scale(${isActive ? 1 : 0.94})`,
+                  transition: "transform 0.6s cubic-bezier(.2,.8,.2,1)",
                   backfaceVisibility: "hidden",
                   pointerEvents: dist > 3 ? "none" : "auto",
                 }}

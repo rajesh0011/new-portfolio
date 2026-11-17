@@ -18,7 +18,7 @@ html.lenis, html.lenis body { height: auto; }
 @media (min-width: 768px) { :root { --stack-step: 22px; } }
 
 .text-gradient-gold {
-  background: linear-gradient(100deg, #B08A3E 0%, #E8C989 40%, #22B8A6 100%);
+  background: linear-gradient(100deg, #7C3AED 0%, #C4B5FD 40%, #22D3EE 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -35,11 +35,11 @@ html.lenis, html.lenis body { height: auto; }
   height: 3px;
   width: 64px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, #D4A857, #22B8A6);
+  background: linear-gradient(90deg, #A78BFA, #22D3EE);
 }
 
 .card-surface, .card-lift { transition: transform .3s ease, box-shadow .3s ease; }
-.card-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(212,168,87,.35); }
+.card-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(167,139,250,.35); }
 
 /* Headings: Cormorant Garamond only (no Georgia / generic-serif fallback) */
 h1, h2, h3, h4, h5, h6, .font-display, .section-heading {
@@ -129,6 +129,56 @@ select:focus-visible {
 
 .card-surface {
   @apply rounded-2xl border border-ink-line/10 bg-white/60 dark:border-paper/10 dark:bg-ink-soft/60 backdrop-blur-sm;
+}
+
+/* ---------- Extra 3D depth ---------- */
+html, body { overflow-x: clip; }
+
+/* Floating aurora orbs behind the whole page (pure CSS, GPU transforms) */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 9999px;
+  filter: blur(110px);
+  opacity: 0.22;
+  will-change: transform;
+}
+body::before {
+  top: -15vmax; left: -12vmax;
+  background: radial-gradient(circle, #8b5cf6, transparent 65%);
+  animation: orb-a 22s ease-in-out infinite alternate;
+}
+body::after {
+  bottom: -18vmax; right: -14vmax;
+  background: radial-gradient(circle, #22d3ee, transparent 65%);
+  animation: orb-b 26s ease-in-out infinite alternate;
+}
+@keyframes orb-a { to { transform: translate3d(14vmax, 10vmax, 0) scale(1.15); } }
+@keyframes orb-b { to { transform: translate3d(-12vmax, -8vmax, 0) scale(1.2); } }
+
+/* Layered, tilting surfaces */
+.card-surface {
+  transform-style: preserve-3d;
+  box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 18px 40px -22px rgba(124,58,237,.35);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;
+}
+@media (hover: hover) {
+  .card-surface:hover {
+    transform: perspective(900px) rotateX(4deg) rotateY(-5deg) translateZ(14px);
+    box-shadow: 0 30px 60px -24px rgba(124,58,237,.5), 0 0 0 1px rgba(167,139,250,.35);
+  }
+}
+
+/* Utility: gentle floating */
+.float-3d { animation: float3d 7s ease-in-out infinite; }
+@keyframes float3d {
+  0%, 100% { transform: translate3d(0,0,0) rotateX(0) rotateY(0); }
+  50% { transform: translate3d(0,-10px,0) rotateX(3deg) rotateY(-3deg); }
 }
 
 /* 3D Transform Utilities */

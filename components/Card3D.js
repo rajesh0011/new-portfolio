@@ -78,7 +78,7 @@ export default function Card3D({ children, className = "", onClick, href, ...pro
         className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
         style={{
           opacity: hovered ? 0.35 : 0,
-          background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(212, 168, 87, 0.25), transparent 70%)`,
+          background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(167, 139, 250, 0.25), transparent 70%)`,
         }}
         aria-hidden="true"
       />

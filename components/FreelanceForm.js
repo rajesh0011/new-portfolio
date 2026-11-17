@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { validateFreelance } from "@/lib/validation";
 
 const initialState = {
   name: "",
@@ -36,8 +37,14 @@ export default function FreelanceForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setStatus("loading");
     setErrorMsg("");
+    const check = validateFreelance(form);
+    if (!check.ok) {
+      setStatus("error");
+      setErrorMsg(Object.values(check.errors)[0]);
+      return;
+    }
+    setStatus("loading");
     try {
       const res = await fetch("/api/freelance", {
         method: "POST",
