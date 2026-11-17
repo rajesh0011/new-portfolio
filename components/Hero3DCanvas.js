@@ -34,9 +34,9 @@ export default function Hero3DCanvas() {
 
     // Color theme definition
     const isDark = resolvedTheme === "dark";
-    const primaryColor = isDark ? 0xd4a857 : 0xb08a3e; // Gold
-    const secondaryColor = isDark ? 0x22b8a6 : 0x178778; // Teal
-    const tertiaryColor = isDark ? 0x5fd4c4 : 0x3b82f6;
+    const primaryColor = isDark ? 0xa78bfa : 0x7c3aed; // Gold
+    const secondaryColor = isDark ? 0x22d3ee : 0x0891B2; // Teal
+    const tertiaryColor = isDark ? 0x67e8f9 : 0x3b82f6;
 
     // Outer geometric cage (Icosahedron)
     const icoGeometry = new THREE.IcosahedronGeometry(1.6, 1);

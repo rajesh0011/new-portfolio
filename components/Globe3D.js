@@ -83,7 +83,7 @@ export default function Globe3D({ className = "" }) {
     // 1. Dark inner core sphere
     const coreGeometry = new THREE.SphereGeometry(globeRadius - 0.5, 36, 36);
     const coreMaterial = new THREE.MeshBasicMaterial({
-      color: isDark ? 0x070b14 : 0xf2ede1,
+      color: isDark ? 0x070b14 : 0xebe7fb,
       transparent: true,
       opacity: 0.85,
     });
@@ -93,7 +93,7 @@ export default function Globe3D({ className = "" }) {
     // 2. Glowing atmosphere ring
     const atmosphereGeometry = new THREE.SphereGeometry(globeRadius * 1.15, 32, 32);
     const atmosphereMaterial = new THREE.MeshBasicMaterial({
-      color: isDark ? 0x22b8a6 : 0xd4a857,
+      color: isDark ? 0x22d3ee : 0xa78bfa,
       transparent: true,
       opacity: isDark ? 0.08 : 0.05,
       side: THREE.BackSide,
@@ -106,8 +106,8 @@ export default function Globe3D({ className = "" }) {
     const dotCount = 1800;
     const dotPositions = [];
     const dotColors = [];
-    const colorGold = new THREE.Color(isDark ? 0xd4a857 : 0xb08a3e);
-    const colorTeal = new THREE.Color(isDark ? 0x22b8a6 : 0x178778);
+    const colorGold = new THREE.Color(isDark ? 0xa78bfa : 0x7c3aed);
+    const colorTeal = new THREE.Color(isDark ? 0x22d3ee : 0x0891B2);
     const colorFaint = new THREE.Color(isDark ? 0x1e293b : 0xd1c7b7);
 
     for (let i = 0; i < dotCount; i++) {
@@ -151,7 +151,7 @@ export default function Globe3D({ className = "" }) {
       // Marker point
       const pinGeom = new THREE.SphereGeometry(city.main ? 2.5 : 1.8, 12, 12);
       const pinMat = new THREE.MeshBasicMaterial({
-        color: city.main ? 0xd4a857 : 0x5fd4c4,
+        color: city.main ? 0xa78bfa : 0x67e8f9,
       });
       const pinMesh = new THREE.Mesh(pinGeom, pinMat);
       pinMesh.position.copy(pos);
@@ -160,7 +160,7 @@ export default function Globe3D({ className = "" }) {
       // Outer ripple ring
       const ringGeom = new THREE.RingGeometry(2.5, 3.8, 20);
       const ringMat = new THREE.MeshBasicMaterial({
-        color: city.main ? 0xd4a857 : 0x22b8a6,
+        color: city.main ? 0xa78bfa : 0x22d3ee,
         side: THREE.DoubleSide,
         transparent: true,
         opacity: 0.7,
@@ -173,7 +173,7 @@ export default function Globe3D({ className = "" }) {
 
     // 5. Arcs from Delhi (main hub) to other world cities
     const mainCityPos = cityVectors[0]; // Delhi
-    const arcColor = isDark ? 0xd4a857 : 0xb08a3e;
+    const arcColor = isDark ? 0xa78bfa : 0x7c3aed;
     for (let i = 1; i < cityVectors.length; i++) {
       const arc = createArc(mainCityPos, cityVectors[i], globeRadius, arcColor);
       globeGroup.add(arc);

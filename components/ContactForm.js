@@ -4,11 +4,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Loader2, CheckCircle2, AlertCircle, Mail, Phone, MapPin, Send, ExternalLink } from "lucide-react";
 import { profile } from "@/lib/data";
+import { validateContact, LIMITS } from "@/lib/validation";
 
 const initialState = { name: "", email: "", company: "", message: "", website: "" };
 
 export default function ContactForm() {
   const [form, setForm] = useState(initialState);
+  const [fieldErrors, setFieldErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState("");
   const [mailtoUrl, setMailtoUrl] = useState("");
@@ -20,10 +22,18 @@ export default function ContactForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setStatus("loading");
     setErrorMsg("");
 
-    const directMailto = `mailto:rajeshrathaur0011@gmail.com?subject=${encodeURIComponent(
+    const check = validateContact(form);
+    setFieldErrors(check.errors);
+    if (!check.ok) {
+      setStatus("error");
+      setErrorMsg("Please fix the highlighted fields.");
+      return;
+    }
+    setStatus("loading");
+
+    const directMailto = `mailto:${profile.email}?subject=${encodeURIComponent(
       `Portfolio Enquiry from ${form.name}`
     )}&body=${encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company || "N/A"}\n\nMessage:\n${form.message}`
@@ -36,15 +46,18 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) {
+        if (data.errors) setFieldErrors(data.errors);
         throw new Error(data.error || "Something went wrong. Please try again.");
       }
       setStatus("success");
       setForm(initialState);
+      setFieldErrors({});
     } catch (err) {
-      // Even if network drops, provide direct email dispatch
-      setStatus("success");
+      // Never claim success when the message was not delivered.
+      setStatus("error");
+      setErrorMsg(err.message || "Network error. Please try again.");
     }
   }
 
@@ -84,6 +97,7 @@ export default function ContactForm() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
           onSubmit={handleSubmit}
+          noValidate
           className="card-surface space-y-4 p-6 sm:p-8"
         >
           {/* Honeypot — hidden from real users */}
@@ -98,13 +112,15 @@ export default function ContactForm() {
           />
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name" name="name" value={form.name} onChange={handleChange} required />
+            <Field label="Name" name="name" value={form.name} onChange={handleChange} error={fieldErrors.name} maxLength={LIMITS.name.max} required />
             <Field
               label="Email"
               name="email"
               type="email"
               value={form.email}
               onChange={handleChange}
+              error={fieldErrors.email}
+              maxLength={LIMITS.email.max}
               required
             />
           </div>
@@ -113,6 +129,8 @@ export default function ContactForm() {
             name="company"
             value={form.company}
             onChange={handleChange}
+            error={fieldErrors.company}
+            maxLength={LIMITS.company.max}
           />
           <div>
             <label htmlFor="message" className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-ink/60 dark:text-paper/60">
@@ -123,11 +141,14 @@ export default function ContactForm() {
               name="message"
               rows={5}
               required
+              maxLength={LIMITS.message.max}
+              aria-invalid={!!fieldErrors.message}
               value={form.message}
               onChange={handleChange}
               placeholder="Tell me a bit about your project or role..."
-              className="w-full rounded-xl border border-ink-line/20 bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-gold dark:border-paper/20"
+              className={`w-full rounded-xl border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-gold ${fieldErrors.message ? "border-red-500" : "border-ink-line/20 dark:border-paper/20"}`}
             />
+            {fieldErrors.message && <p className="mt-1 text-xs text-red-500">{fieldErrors.message}</p>}
           </div>
 
           <button
@@ -164,9 +185,16 @@ export default function ContactForm() {
           )}
 
           {status === "error" && (
-            <p className="flex items-center gap-2 text-sm text-red-500">
-              <AlertCircle className="h-4 w-4" /> {errorMsg}
-            </p>
+            <div className="space-y-1">
+              <p role="alert" className="flex items-center gap-2 text-sm text-red-500">
+                <AlertCircle className="h-4 w-4" /> {errorMsg}
+              </p>
+              {mailtoUrl && (
+                <a href={mailtoUrl} className="font-mono text-xs text-gold-dark hover:underline dark:text-gold">
+                  Or send it from your email client
+                </a>
+              )}
+            </div>
           )}
         </motion.form>
       </div>
@@ -174,7 +202,7 @@ export default function ContactForm() {
   );
 }
 
-function Field({ label, name, type = "text", value, onChange, required = false }) {
+function Field({ label, name, type = "text", value, onChange, required = false, error, maxLength }) {
   return (
     <div>
       <label htmlFor={name} className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-ink/60 dark:text-paper/60">
@@ -185,10 +213,13 @@ function Field({ label, name, type = "text", value, onChange, required = false }
         name={name}
         type={type}
         required={required}
+        maxLength={maxLength}
+        aria-invalid={!!error}
         value={value}
         onChange={onChange}
-        className="w-full rounded-xl border border-ink-line/20 bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-gold dark:border-paper/20"
+        className={`w-full rounded-xl border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-gold ${error ? "border-red-500" : "border-ink-line/20 dark:border-paper/20"}`}
       />
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }

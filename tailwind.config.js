@@ -9,24 +9,24 @@ module.exports = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#0B1120",
-          soft: "#111827",
-          line: "#1F2937",
+          DEFAULT: "#0B0A1F",
+          soft: "#14122E",
+          line: "#272453",
         },
         paper: {
-          DEFAULT: "#FAF7F0",
-          soft: "#F2EDE1",
-          line: "#E4DCC9",
+          DEFAULT: "#F5F3FF",
+          soft: "#EBE7FB",
+          line: "#D9D3F5",
         },
         gold: {
-          DEFAULT: "#D4A857",
-          light: "#E8C989",
-          dark: "#B08A3E",
+          DEFAULT: "#A78BFA",
+          light: "#C4B5FD",
+          dark: "#7C3AED",
         },
         teal: {
-          DEFAULT: "#22B8A6",
-          light: "#5FD4C4",
-          dark: "#178778",
+          DEFAULT: "#22D3EE",
+          light: "#67E8F9",
+          dark: "#0891B2",
         },
       },
       fontFamily: {
